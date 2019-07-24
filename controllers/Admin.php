@@ -16,13 +16,19 @@ $htmlStats = null;
 foreach ($todoList as $task) {
     $status = ($task['status']) ? 'Выполнен' : 'Не выполнен';
     $successButton = '';
+    $isEditText = '';
     if (!$task['status']) {
         $successButton = '<a href="index.php?view=SuccessTask&id=' . $task['id'] . '"><button class="btn btn-success btn-sm">Выполнить</button></a> ';
     }
+    if ($task['isEdit']) {
+        $isEditText = '<br><i>Отредактировано админом!</i>';
+    }
+    $htmlStats .= '<form action="index.php?view=EditTask&id=' . $task['id'] . '" method="POST">';
     $htmlStats .= '<tr><td>' . $task['id'] . '</td><td>' . $task['username'] . '</td>';
-    $htmlStats .= '<td>' . $task['email'] . '</td><td>' . $task['content'] . '</td>';
+    $htmlStats .= '<td>' . $task['email'] . '</td><td><textarea name="content">' . $task['content'] . '</textarea>' . $isEditText . '</td>';
     $htmlStats .= '<td>' . $status . '</td><td>' .  $successButton;
-    $htmlStats .= '<a href="index.php?view=DeleteTask&id=' . $task['id'] . '"><button class="btn btn-danger btn-sm">Удалить</button></a></td>';
+    $htmlStats .= '<a href="index.php?view=DeleteTask&id=' . $task['id'] . '"><button class="btn btn-danger btn-sm">Удалить</button></a> ';
+    $htmlStats .= '<button type="submit" class="btn btn-warning btn-sm">Сохранить</button></td></tr></form>';
 }
 
 $vars['{LIST}'] = $htmlStats;

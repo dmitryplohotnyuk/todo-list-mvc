@@ -13,8 +13,12 @@ $htmlStats = null;
     
 foreach ($todoList as $task) {
     $status = ($task['status']) ? 'Выполнен' : 'Не выполнен';
+    $isEditText = '';
+    if ($task['isEdit']) {
+        $isEditText = '<br><i>Отредактировано админом!</i>';
+    }
     $htmlStats .= '<tr><td>' . $task['id'] . '</td><td>' . $task['username'] . '</td>';
-    $htmlStats .= '<td>' . $task['email'] . '</td><td>' . $task['content'] . '</td>';
+    $htmlStats .= '<td>' . $task['email'] . '</td><td>' . $task['content'] . $isEditText . '</td>';
     $htmlStats .= '<td>' . $status . '</td></tr>';
 }
 
