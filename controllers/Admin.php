@@ -26,9 +26,9 @@ foreach ($todoList as $task) {
     $htmlStats .= '<form action="index.php?view=EditTask&id=' . $task['id'] . '" method="POST">';
     $htmlStats .= '<tr><td>' . $task['id'] . '</td><td>' . $task['username'] . '</td>';
     $htmlStats .= '<td>' . $task['email'] . '</td><td><textarea name="content">' . $task['content'] . '</textarea>' . $isEditText . '</td>';
-    $htmlStats .= '<td>' . $status . '</td><td>' .  $successButton;
+    $htmlStats .= '<td>' . $status . '</td><td> <button type="submit" class="btn btn-warning btn-sm">Сохранить</button></form> ' .  $successButton;
     $htmlStats .= '<a href="index.php?view=DeleteTask&id=' . $task['id'] . '"><button class="btn btn-danger btn-sm">Удалить</button></a> ';
-    $htmlStats .= '<button type="submit" class="btn btn-warning btn-sm">Сохранить</button></td></tr></form>';
+    $htmlStats .= '</td></tr>';
 }
 
 $vars['{LIST}'] = $htmlStats;

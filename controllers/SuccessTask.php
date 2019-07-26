@@ -8,8 +8,6 @@ $id = htmlspecialchars($id);
 $task = \ToDoList\TaskList::getById($id);
 $props = $task->getInfo();
 
-var_dump($props);
-
 $props['status'] = True;
 
 $task->setInfo($props);
