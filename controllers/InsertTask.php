@@ -4,14 +4,14 @@ foreach($_POST as $key => $value) {
     $props[$key] = htmlspecialchars($value); 
 }
 
-$props['id'] = null;
-$props['status'] = null;
-$props['isEdit'] = null;
-
 $task = new \ToDoList\Task($props);
 
-if(!$task->insert()) {
-   echo "<script>alert('Ошибка при добавлении новой задачи');</script>";
-} 
+try {
+    $task->insert();
+} catch(\Exception $error) {
+    $message = $error->getMessage();
+    echo "<script>alert('$message');</script>";
+}
 
 echo "<script>javascript:window.location='/todo-list'</script>";
+

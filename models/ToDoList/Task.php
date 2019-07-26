@@ -20,21 +20,33 @@ class Task implements TaskInterface
         $this->connection = Connection::getConnection();
     }
 
-    public function insert(): Bool
+    public function insert(): void
     {
-       return mysqli_query($this->connection, "INSERT INTO list (username, email, content) 
-                           VALUES ('$this->username', '$this->email', '$this->content')");
+        $result = mysqli_query($this->connection, "INSERT INTO list (username, email, content) 
+                                VALUES ('$this->username', '$this->email', '$this->content')
+                            ");
+        if (!$result) {
+            throw new \Exception(mysqli_error($this->connection));
+        }
     }
 
-    public function update(): Bool
+    public function update(): void
     {
-        return mysqli_query($this->connection, "UPDATE list SET username = '$this->username', email = '$this->email', 
-                            content = '$this->content', status = '$this->status', isEdit = '$this->isEdit' WHERE id = $this->id");
+        $result = mysqli_query($this->connection, "UPDATE list SET username = '$this->username', 
+                                email = '$this->email', content = '$this->content', 
+                                status = '$this->status', isEdit = '$this->isEdit' WHERE id = $this->id
+                            ");
+        if (!$result) {
+            throw new \Exception(mysqli_error($this->connection));
+        }
     }
 
-    public function delete(): Bool
+    public function delete(): void
     {
-       return mysqli_query($this->connection, "DELETE FROM list WHERE id = $this->id");
+        $result = mysqli_query($this->connection, "DELETE FROM list WHERE id = $this->id");
+        if (!$result) {
+            throw new \Exception(mysqli_error($this->connection));
+        }
     }
 
     public function setInfo(Array $props): void

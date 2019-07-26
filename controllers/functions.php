@@ -11,7 +11,6 @@ function outputHTML($vars, $template)
     );
 }
 
-
 function check_login($login, $pass) {
 	$md5_passwd = "202cb962ac59075b964b07152d234b70";
 	$md5_paswd_post = md5($pass);
